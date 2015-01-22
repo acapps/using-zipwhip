@@ -10,7 +10,7 @@ Zipwhip's API relies on a sessionKey to perform all actions. This is a GUID repr
 
 A sessionKey is obtained from perfomring a `user/login` webcall for the account.
 
-###It all begins with `user
+###It all begins with user/login
 ``` Sh
 $ curl -i https://api.zipwhip.com/user/login \
 	-d username=[phone number] \
