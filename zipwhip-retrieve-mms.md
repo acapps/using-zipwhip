@@ -28,14 +28,14 @@ $ curl -G https://api.zipwhip.com/messageAttachment/list \
             "dateCreated":"2015-03-26T13:15:17-07:00",
             "fileSizeBytes":40101,
             "mimeType":"image/jpeg",
-            "storageKey":"be9396da-a6aa-442c-9406-e1d4562f90a5"
+            "storageKey":"be9396da-a6aa-442c-9406-asdfasdfasdf"
         },
         {
             "fileName":"123_1.smil",
             "dateCreated":"2015-03-26T13:15:17-07:00",
             "fileSizeBytes":300,
             "mimeType":"application/smil",
-            "storageKey":"269023ec-67a0-4481-a820-1c12b3363836"
+            "storageKey":"269023ec-67a0-4481-a820-asdfasdfasdf"
         }
     ],
 }
@@ -55,7 +55,7 @@ stored with a key and permissions.
 ```sh
 $ curl -G https://api.zipwhip.com/hostedContent/get \
        -d session=[sessionKey] \
-       s-d storageKey=[storageKey]
+       -d storageKey=[storageKey]
 ```
 
 ###Example Response
