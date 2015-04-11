@@ -22,14 +22,14 @@ $ curl -G https://api.zipwhip.com/messageAttachment/list \
 {  
   "total":2,
   "response":[  
-    {                                        ƒ
+    {
       "fileName":"IMG_1827.jpg",
       "dateCreated":"2015-03-26T13:15:17-07:00",
       "fileSizeBytes":40101,
       "mimeType":"image/jpeg",
       "storageKey":"be9396da-a6aa-442c-9406-asdfasdfasdf"
     },
-    {  
+    {
       "fileName":"123_1.smil",
       "dateCreated":"2015-03-26T13:15:17-07:00",
       "fileSizeBytes":300,
@@ -39,4 +39,4 @@ $ curl -G https://api.zipwhip.com/messageAttachment/list \
   ],
 }```
 
->The key data points are the `storageKey` values. These will be used in the next web calls.
+> The key data points are the `storageKey` values. These will be used in the next web calls.
