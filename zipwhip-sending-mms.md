@@ -19,24 +19,25 @@ $ curl -G https://api.zipwhip.com/messageAttachment/list \
 
 ###Example Response
 ```JSON
-{  
-  "total":2,
-  "response":[  
-    {                                        ƒ
-      "fileName":"IMG_1827.jpg",
-      "dateCreated":"2015-03-26T13:15:17-07:00",
-      "fileSizeBytes":40101,
-      "mimeType":"image/jpeg",
-      "storageKey":"be9396da-a6aa-442c-9406-asdfasdfasdf"
-    },
-    {  
-      "fileName":"123_1.smil",
-      "dateCreated":"2015-03-26T13:15:17-07:00",
-      "fileSizeBytes":300,
-      "mimeType":"application/smil",
-      "storageKey":"269023ec-67a0-4481-a820-asdfasdfasdf"
-    }
-  ],
-}```
+{
+	"total":2,
+	"response":[
+		{
+			"fileName":"IMG_1827.jpg",
+			"dateCreated":"2015-03-26T13:15:17-07:00",
+			"fileSizeBytes":40101,
+			"mimeType":"image/jpeg",
+			"storageKey":"be9396da-a6aa-442c-9406-asdfasdfasdf"
+		},
+		{
+			"fileName":"123_1.smil",
+			"dateCreated":"2015-03-26T13:15:17-07:00",
+			"fileSizeBytes":300,
+			"mimeType":"application/smil",
+			"storageKey":"269023ec-67a0-4481-a820-asdfasdfasdf"
+		}
+	]
+}
+```
 
->The key data points are the `storageKey` values. These will be used in the next web calls.
+> The key data points are the `storageKey` values. These will be used in the next web calls.

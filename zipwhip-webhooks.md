@@ -41,14 +41,16 @@ $ curl -X POST https://api.zipwhip.com/webhook/add \
 ###Example Response
 ```JSON
 {
-    success: true,
-    response: [{
-        webhookId: 687557714,
-        type: "message",
-        event: "receive",
-        url: "http://test.zipwhip.com/message/receive",
-        method: "POST"
-    }]
+	"success": true,
+	"response": [
+		{
+			"webhookId": 687557714,
+			"type": "message",
+			"event": "receive",
+			"url": "http://test.zipwhip.com/message/receive",
+			"method": "POST"
+		}
+	]
 }
 ```
 
@@ -73,14 +75,16 @@ $ curl -X POST https://api.zipwhip.com/webhook/add \
 ###Example Response
 ```JSON
 {
-    success: true,
-    response: [{
-        webhookId: 687557714,
-        type: "message",
-        event: "receive",
-        url: "http://test.zipwhip.com/message/receive",
-        method: "PUT"
-    }]
+	"success": true,
+	"response": [
+		{
+			"webhookId": 687557714,
+			"type": "message",
+			"event": "receive",
+			"url": "http://test.zipwhip.com/message/receive",
+			"method": "PUT"
+		}
+	]
 }
 ```
 
@@ -100,16 +104,18 @@ $ curl -G https://api.zipwhip.com/webhook/add \
 
 ###Example Response
 ```JSON
- {
-     success: true,
-     response: [{
-         webhookId: 687557714,
-         type: "message",
-         event: "receive",
-         url: "http://test.zipwhip.com/message/receive",
-         method: "PUT"
-     }]
- }
+{
+	"success": true,
+	"response": [
+		{
+			"webhookId": 687557714,
+			"type": "message",
+			"event": "receive",
+			"url": "http://test.zipwhip.com/message/receive",
+			"method": "PUT"
+		}
+	]
+}
 ```
 
 ##Delete Web Hooks
@@ -131,7 +137,7 @@ $ curl -X POST https://api.zipwhip.com/webhook/add \
 ###Example Response
 ```JSON
 {
-    success: true,
-    response: []
+	"success": true,
+	"response": []
 }
 ``` 
