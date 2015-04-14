@@ -47,7 +47,7 @@ $ curl -X POST https://api.zipwhip.com/webhook/add \
 			"webhookId": 687557714,
 			"type": "message",
 			"event": "receive",
-			"url": "http://test.zipwhip.com/message/receive",
+			"url": "https://test.zipwhip.com/message/receive",
 			"method": "POST"
 		}
 	]
@@ -81,7 +81,7 @@ $ curl -X POST https://api.zipwhip.com/webhook/add \
 			"webhookId": 687557714,
 			"type": "message",
 			"event": "receive",
-			"url": "http://test.zipwhip.com/message/receive",
+			"url": "https://test.zipwhip.com/message/receive",
 			"method": "PUT"
 		}
 	]
@@ -111,7 +111,7 @@ $ curl -G https://api.zipwhip.com/webhook/add \
 			"webhookId": 687557714,
 			"type": "message",
 			"event": "receive",
-			"url": "http://test.zipwhip.com/message/receive",
+			"url": "https://test.zipwhip.com/message/receive",
 			"method": "PUT"
 		}
 	]
