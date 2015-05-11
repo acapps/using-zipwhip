@@ -1,7 +1,7 @@
 #Zipwhip Web Hooks
 Web Hooks allow Server-to-Server communication of new events, without the hassle
-of a persistent connection. The idea behind Web Hooks is to give implementors the ability to receive real-time events as items change within Zipwhip.
-As the implementor, you can chose which events you would like to listen for.
+of a persistent connection. The idea behind Web Hooks is to give implementers the ability to receive real-time events as items change within Zipwhip.
+As the implementer, you can chose which events you would like to listen for.
 
 ###Events
 * Delete
@@ -17,7 +17,7 @@ As the implementor, you can chose which events you would like to listen for.
 > Zipwhip does not support SSL V3.0 and older. 
 
 ##Adding Web Hooks
-Install a Web Hook onto the text-enabled phone number. When an event occurrs the details of the message will be delivered to the URL specified.
+Install a Web Hook onto the text-enabled phone number. When an event occurs the details of the message will be delivered to the URL specified.
 
 ###Parameters
 |Parameter|Required|Description
