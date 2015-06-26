@@ -67,7 +67,7 @@ Update an existing Web Hook configuration. Change the URL or update the Method u
 
 ###Example Request
 ```sh
-$ curl -X POST https://api.zipwhip.com/webhook/add \
+$ curl -X POST https://api.zipwhip.com/webhook/update \
        -d session=[sessionKey] \
        -d method=PUT
 ```
@@ -98,7 +98,7 @@ List the currently installed Web Hooks for the account.
 
 ###Example Request
 ```sh
-$ curl -G https://api.zipwhip.com/webhook/add \
+$ curl -G https://api.zipwhip.com/webhook/list \
        -d session=[sessionKey]
 ```
 
@@ -129,7 +129,7 @@ Update an existing Web Hook configuration. Change the URL or update the Method u
 
 ###Example Request
 ```sh
-$ curl -X POST https://api.zipwhip.com/webhook/add \
+$ curl -X POST https://api.zipwhip.com/webhook/delete \
        -d session=[sessionKey] \
        -d webhookId=687557714
 ```
