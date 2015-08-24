@@ -1,22 +1,39 @@
 #Zipwhip Web Hooks
 Web Hooks allow Server-to-Server communication of new events, without the hassle
 of a persistent connection. The idea behind Web Hooks is to give implementers the ability to receive real-time events as items change within Zipwhip.
-As the implementer, you can chose which events you would like to listen for.
+
+##Security
+With all items involving messages and messages bodies, it is important to setup Web Hooks with privacy in mind. 
+
+* It is recommended that the destination address is HTTPS.
+* Zipwhip supports TLS V1.0 and greater.
+> Zipwhip does not support SSL V3.0 and older. 
+
+###Access Control List, ACL
+If you have strict firewall rules or would prefer to lock down your Web Hook end-points to our IP space, then those ranges are provided below.
+
+> 69.46.44.0/24
+> 208.69.95.64/26
+
+##General Information
 
 ###Events
+As the implementer, you can chose which events you would like to listen for.
+
 * Delete
 * Progress
 * Read
 * Receive
 * Send
 
-> It is recommended that the destination address is HTTPS.
- 
-> Zipwhip supports TLS V1.0 and greater.
-
-> Zipwhip does not support SSL V3.0 and older. 
-
-##Example Payload
+###Example Payload
+```JSON
+POST /message/receive HTTP/1.1
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: http://www.yoururl.com/zipwhip/api/receive
+Content-Length: 581
+Content-Type: application/json; charset=UTF-8
+```
 
 ```JSON
 {  
