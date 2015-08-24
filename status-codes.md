@@ -18,6 +18,7 @@ At time of `message/send` these are the status codes expected in in the response
 |-124|Unable to determine carrier|Failure|No
 |-1|Unknown Error|Unknown|Yes
 
+</br>
 ###Message Sending/Progress
 This particular set of status codes contains some of the specialized codes for `message/progress` events as they are fired through the Web Hook system. These specific status codes are labeled as `transient`. _They are unlikely seen in any `message/list` API calls, due to their fleeting nature._
 
