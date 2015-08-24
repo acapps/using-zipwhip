@@ -16,6 +16,36 @@ As the implementer, you can chose which events you would like to listen for.
 
 > Zipwhip does not support SSL V3.0 and older. 
 
+##Example Payload
+
+```JSON
+{  
+  "body":"Thanks for texting, this is an auto reply!",
+  "bodySize":42,
+  "visible":true,
+  "hasAttachment":false,
+  "dateRead":null,
+  "bcc":null,
+  "finalDestination":"4257772300",
+  "messageType":"MO",
+  "deleted":false,
+  "statusCode":4,
+  "id":634151298329219072,
+  "scheduledDate":null,
+  "fingerprint":"132131532",
+  "messageTransport":9,
+  "contactId":3382213402,
+  "address":"ptn:/4257772222",
+  "read":false,
+  "dateCreated":"2015-08-19T16:53:45-07:00",
+  "dateDeleted":null,
+  "dateDelivered":null,
+  "cc":null,
+  "finalSource":"4257772222",
+  "deviceId":299538202
+}
+```
+
 ##Adding Web Hooks
 Install a Web Hook onto the text-enabled phone number. When an event occurs the details of the message will be delivered to the URL specified.
 
