@@ -13,6 +13,7 @@ With all items involving messages and messages bodies, it is important to setup 
 If you have strict firewall rules or would prefer to lock down your Web Hook end-points to our IP space, then those ranges are provided below.
 
 > 69.46.44.0/24
+
 > 208.69.95.64/26
 
 ##General Information
