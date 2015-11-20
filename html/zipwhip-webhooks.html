@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="github-markdown.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#zipwhip-web-hooks">Zipwhip Web Hooks</a><ul>
+<li><a href="#security">Security</a><ul>
+<li><a href="#access-control-list-acl">Access Control List, ACL</a></li>
+</ul></li>
+<li><a href="#general-information">General Information</a><ul>
+<li><a href="#events">Events</a></li>
+<li><a href="#example-payload">Example Payload</a></li>
+</ul></li>
+<li><a href="#adding-web-hooks">Adding Web Hooks</a><ul>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#example-request">Example Request</a></li>
+<li><a href="#example-response">Example Response</a></li>
+</ul></li>
+<li><a href="#updating-web-hooks">Updating Web Hooks</a><ul>
+<li><a href="#parameters-1">Parameters</a></li>
+<li><a href="#example-request-1">Example Request</a></li>
+<li><a href="#example-response-1">Example Response</a></li>
+</ul></li>
+<li><a href="#list-web-hooks">List Web Hooks</a><ul>
+<li><a href="#parameters-2">Parameters</a></li>
+<li><a href="#example-request-2">Example Request</a></li>
+<li><a href="#example-response-2">Example Response</a></li>
+</ul></li>
+<li><a href="#delete-web-hooks">Delete Web Hooks</a><ul>
+<li><a href="#parameters-3">Parameters</a></li>
+<li><a href="#example-request-3">Example Request</a></li>
+<li><a href="#example-response-3">Example Response</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="zipwhip-web-hooks">Zipwhip Web Hooks</h1>
+<p>Web Hooks allow Server-to-Server communication of new events, without the hassle of a persistent connection. The idea behind Web Hooks is to give implementers the ability to receive real-time events as items change within Zipwhip.</p>
+<h2 id="security">Security</h2>
+<p>With all items involving messages and messages bodies, it is important to setup Web Hooks with privacy in mind.</p>
+<ul>
+<li>It is recommended that the destination address is HTTPS.</li>
+<li>Zipwhip supports TLS V1.0 and greater. &gt; Zipwhip does not support SSL V3.0 and older.</li>
+</ul>
+<h3 id="access-control-list-acl">Access Control List, ACL</h3>
+<p>If you have strict firewall rules or would prefer to lock down your Web Hook end-points to our IP space, then those ranges are provided below.</p>
+<blockquote>
+<p>69.46.44.0/24</p>
+</blockquote>
+<blockquote>
+<p>208.69.95.64/26</p>
+</blockquote>
+<h2 id="general-information">General Information</h2>
+<h3 id="events">Events</h3>
+<p>As the implementer, you can chose which events you would like to listen for.</p>
+<ul>
+<li>Delete</li>
+<li>Progress</li>
+<li>Read</li>
+<li>Receive</li>
+<li>Send</li>
+</ul>
+<h3 id="example-payload">Example Payload</h3>
+<pre><code>POST /message/receive HTTP/1.1
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: http://www.yoururl.com/zipwhip/api/receive
+Content-Length: 581
+Content-Type: application/json; charset=UTF-8</code></pre>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>  
+  <span class="dt">&quot;body&quot;</span><span class="fu">:</span><span class="st">&quot;Thanks for texting, this is an auto reply!&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;bodySize&quot;</span><span class="fu">:</span><span class="dv">42</span><span class="fu">,</span>
+  <span class="dt">&quot;visible&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>
+  <span class="dt">&quot;hasAttachment&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">,</span>
+  <span class="dt">&quot;dateRead&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;bcc&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;finalDestination&quot;</span><span class="fu">:</span><span class="st">&quot;4257772300&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;messageType&quot;</span><span class="fu">:</span><span class="st">&quot;MO&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;deleted&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">,</span>
+  <span class="dt">&quot;statusCode&quot;</span><span class="fu">:</span><span class="dv">4</span><span class="fu">,</span>
+  <span class="dt">&quot;id&quot;</span><span class="fu">:</span><span class="dv">634151298329219072</span><span class="fu">,</span>
+  <span class="dt">&quot;scheduledDate&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span><span class="st">&quot;132131532&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;messageTransport&quot;</span><span class="fu">:</span><span class="dv">9</span><span class="fu">,</span>
+  <span class="dt">&quot;contactId&quot;</span><span class="fu">:</span><span class="dv">3382213402</span><span class="fu">,</span>
+  <span class="dt">&quot;address&quot;</span><span class="fu">:</span><span class="st">&quot;ptn:/4257772222&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;read&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">,</span>
+  <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span><span class="st">&quot;2015-08-19T16:53:45-07:00&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;dateDeleted&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;dateDelivered&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;cc&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;finalSource&quot;</span><span class="fu">:</span><span class="st">&quot;4257772222&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span><span class="dv">299538202</span>
+<span class="fu">}</span></code></pre></div>
+<h2 id="adding-web-hooks">Adding Web Hooks</h2>
+<p>Install a Web Hook onto the text-enabled phone number. When an event occurs the details of the message will be delivered to the URL specified.</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Required</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">session</td>
+<td align="left">True</td>
+<td align="left">Session is the response of user/login.</td>
+</tr>
+<tr class="even">
+<td align="left">type</td>
+<td align="left">True</td>
+<td align="left">For now, the available options is ‘message’</td>
+</tr>
+<tr class="odd">
+<td align="left">event</td>
+<td align="left">True</td>
+<td align="left">Events listed above. i.e. send, receive, etc.</td>
+</tr>
+<tr class="even">
+<td align="left">url</td>
+<td align="left">True</td>
+<td align="left">The destination when the event fires.</td>
+</tr>
+<tr class="odd">
+<td align="left">method</td>
+<td align="left">False</td>
+<td align="left">HTTP Method used for Web Hook. i.e. POST, PUT, GET</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-request">Example Request</h3>
+<pre class="sh"><code>$ curl -X POST https://api.zipwhip.com/webhook/add \
+       -d session=[sessionKey] \
+       -d type=message \
+       -d event=receive \
+       -d url=https://test.zipwhip.com/message/receive \
+       -d method=POST</code></pre>
+<h3 id="example-response">Example Response</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+    <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+        <span class="fu">{</span>
+            <span class="dt">&quot;webhookId&quot;</span><span class="fu">:</span> <span class="dv">687557714</span><span class="fu">,</span>
+            <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;message&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;event&quot;</span><span class="fu">:</span> <span class="st">&quot;receive&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://test.zipwhip.com/message/receive&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;method&quot;</span><span class="fu">:</span> <span class="st">&quot;POST&quot;</span>
+        <span class="fu">}</span>
+    <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<h2 id="updating-web-hooks">Updating Web Hooks</h2>
+<p>Update an existing Web Hook configuration. Change the URL or update the Method used.</p>
+<h3 id="parameters-1">Parameters</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Required</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">session</td>
+<td align="left">True</td>
+<td align="left">Session is the response of user/login.</td>
+</tr>
+<tr class="even">
+<td align="left">webhookId</td>
+<td align="left">True</td>
+<td align="left">The Id of an installed Web Hook.</td>
+</tr>
+<tr class="odd">
+<td align="left">url</td>
+<td align="left">False</td>
+<td align="left">The destination when the event fires.</td>
+</tr>
+<tr class="even">
+<td align="left">method</td>
+<td align="left">False</td>
+<td align="left">HTTP Method used for Web Hook. i.e. POST, PUT, GET</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-request-1">Example Request</h3>
+<pre class="sh"><code>$ curl -X POST https://api.zipwhip.com/webhook/update \
+       -d session=[sessionKey] \
+       -d method=PUT</code></pre>
+<h3 id="example-response-1">Example Response</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+    <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+        <span class="fu">{</span>
+            <span class="dt">&quot;webhookId&quot;</span><span class="fu">:</span> <span class="dv">687557714</span><span class="fu">,</span>
+            <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;message&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;event&quot;</span><span class="fu">:</span> <span class="st">&quot;receive&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://test.zipwhip.com/message/receive&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;method&quot;</span><span class="fu">:</span> <span class="st">&quot;PUT&quot;</span>
+        <span class="fu">}</span>
+    <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<h2 id="list-web-hooks">List Web Hooks</h2>
+<p>List the currently installed Web Hooks for the account.</p>
+<h3 id="parameters-2">Parameters</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Required</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">session</td>
+<td align="left">True</td>
+<td align="left">Session is the response of user/login.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-request-2">Example Request</h3>
+<pre class="sh"><code>$ curl -G https://api.zipwhip.com/webhook/list \
+       -d session=[sessionKey]</code></pre>
+<h3 id="example-response-2">Example Response</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+    <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+        <span class="fu">{</span>
+            <span class="dt">&quot;webhookId&quot;</span><span class="fu">:</span> <span class="dv">687557714</span><span class="fu">,</span>
+            <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;message&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;event&quot;</span><span class="fu">:</span> <span class="st">&quot;receive&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://test.zipwhip.com/message/receive&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;method&quot;</span><span class="fu">:</span> <span class="st">&quot;PUT&quot;</span>
+        <span class="fu">}</span>
+    <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<h2 id="delete-web-hooks">Delete Web Hooks</h2>
+<p>Update an existing Web Hook configuration. Change the URL or update the Method used.</p>
+<h3 id="parameters-3">Parameters</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Required</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">session</td>
+<td align="left">True</td>
+<td align="left">Session is the response of user/login.</td>
+</tr>
+<tr class="even">
+<td align="left">webhookId</td>
+<td align="left">True</td>
+<td align="left">The Id of an installed Web Hook.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-request-3">Example Request</h3>
+<pre class="sh"><code>$ curl -X POST https://api.zipwhip.com/webhook/delete \
+       -d session=[sessionKey] \
+       -d webhookId=687557714</code></pre>
+<h3 id="example-response-3">Example Response</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+    <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="ot">[]</span>
+<span class="fu">}</span></code></pre></div>
+</body>
+</html>

@@ -9,9 +9,6 @@ At time of `message/send` these are the status codes expected in in the response
 
 |Code|Description|State|Retryable
 |:---------|:--------|:----------|:--------
-|-1234|Recipient Sent in "STOP"|Failure|No
-|-855|Internal Error|Failure|Yes
-|-801|Spam Protection|Failure|No
 |-704|Internal Error|Failure|No
 |-700|Internal Error|Failure|No
 |-394|Invalid Parameter Length|Failure|No
@@ -19,11 +16,15 @@ At time of `message/send` these are the status codes expected in in the response
 |-1|Unknown Error|Unknown|Yes
 
 </br>
+
 ###Message Sending/Progress
 This particular set of status codes contains some of the specialized codes for `message/progress` events as they are fired through the Web Hook system. These specific status codes are labeled as `transient`. _They are unlikely seen in any `message/list` API calls, due to their fleeting nature._
 
 |Code|Description|State|Final
 |:---------|:--------|:----------|:--------
+|-1234|Recipient Sent in "STOP"|Failure|No
+|-855|Internal Error|Failure|Yes
+|-801|Spam Protection|Failure|No
 |0|Delivered - No confirmation|Success|Yes
 |1|In Process|Transient|No
 |2|Queued|Transient|No

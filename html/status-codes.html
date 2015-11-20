@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="github-markdown.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#zipwhip-message-status-codes">Zipwhip Message Status Codes</a><ul>
+<li><a href="#status-codes">Status Codes</a><ul>
+<li><a href="#message-send-failures">Message Send Failures</a></li>
+<li><a href="#message-sendingprogress">Message Sending/Progress</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="zipwhip-message-status-codes">Zipwhip Message Status Codes</h1>
+<p>The status codes listed in this document are used throughout Zipwhip’s messaging infrastructure. Zipwhip strives to normalize all carrier errors to a unified list for our developers to consume.</p>
+<h2 id="status-codes">Status Codes</h2>
+<p>The list of status codes fall into to buckets, those at time of <code>message/send</code> and those that are part of the sending process. To put it another way synchronous vs asynchronous errors. Web Hooks, specifically <code>message/progress</code> gives the implementor the ability to track the message through the full sending process.</p>
+<h3 id="message-send-failures">Message Send Failures</h3>
+<p>At time of <code>message/send</code> these are the status codes expected in in the response payload, if an error has occurred.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+<th align="left">State</th>
+<th align="left">Retryable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-704</td>
+<td align="left">Internal Error</td>
+<td align="left">Failure</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">-700</td>
+<td align="left">Internal Error</td>
+<td align="left">Failure</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">-394</td>
+<td align="left">Invalid Parameter Length</td>
+<td align="left">Failure</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">-124</td>
+<td align="left">Unable to determine carrier</td>
+<td align="left">Failure</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">-1</td>
+<td align="left">Unknown Error</td>
+<td align="left">Unknown</td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<h3 id="message-sendingprogress">Message Sending/Progress</h3>
+<p>This particular set of status codes contains some of the specialized codes for <code>message/progress</code> events as they are fired through the Web Hook system. These specific status codes are labeled as <code>transient</code>. <em>They are unlikely seen in any <code>message/list</code> API calls, due to their fleeting nature.</em></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+<th align="left">State</th>
+<th align="left">Final</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-1234</td>
+<td align="left">Recipient Sent in “STOP”</td>
+<td align="left">Failure</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">-855</td>
+<td align="left">Internal Error</td>
+<td align="left">Failure</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">-801</td>
+<td align="left">Spam Protection</td>
+<td align="left">Failure</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">0</td>
+<td align="left">Delivered - No confirmation</td>
+<td align="left">Success</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">In Process</td>
+<td align="left">Transient</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Queued</td>
+<td align="left">Transient</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Queued</td>
+<td align="left">Transient</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Delivered - Confirmed</td>
+<td align="left">Success</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Error - Confirmed</td>
+<td align="left">Failure</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Delivered - Confirmed by DR</td>
+<td align="left">Success</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">Error - Confirmed by DR</td>
+<td align="left">Failure</td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

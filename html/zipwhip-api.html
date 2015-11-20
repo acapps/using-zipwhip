@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="github-markdown.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#working-with-zipwhips-api">Working With Zipwhip’s API</a><ul>
+<li><a href="#basics">Basics</a><ul>
+<li><a href="#it-all-begins-with-userlogin">It all begins with user/login</a></li>
+</ul></li>
+<li><a href="#general-application-flow">General Application Flow</a><ul>
+<li><a href="#conversationlist">Conversation/List</a></li>
+<li><a href="#conversationget">Conversation/Get</a></li>
+<li><a href="#contactlist">Contact/List</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="working-with-zipwhips-api">Working With Zipwhip’s API</h1>
+<p><em>Zipwhip’s exposed API is the same API that we use to build all of our products</em></p>
+<h2 id="basics">Basics</h2>
+<p>Zipwhip’s API relies on a sessionKey to perform all actions. This is a GUID representation of an authenticated user. &gt;Tip: SessionKeys do not expire, they can be obtained once and then used for all future actions.</p>
+<p>A sessionKey is obtained from perfomring a <code>user/login</code> webcall for the account.</p>
+<h3 id="it-all-begins-with-userlogin">It all begins with user/login</h3>
+<pre class="sh"><code>$ curl -i https://api.zipwhip.com/user/login \
+    -d username=[phone number] \
+    -d password=[account password]</code></pre>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>
+  <span class="dt">&quot;response&quot;</span><span class="fu">:</span><span class="st">&quot;3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<blockquote>
+<p>In this case the <code>response</code> is the sessionKey for the account.</p>
+</blockquote>
+<p>Next you’ll want to send a message. To do so, we will use the the sessionKey retrieved from <code>user/login</code>.</p>
+<pre class="sh"><code>$ curl -i https://api.zipwhip.com/message/send \
+    -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789
+    -d --data-rulencode contacts=&#39;+18559479447&#39;
+    -d --data-urlencode body=&#39;Hello World, from Zipwhip!&#39;</code></pre>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+    <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;4236521183&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;root&quot;</span><span class="fu">:</span> <span class="st">&quot;327559093363723008&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;tokens&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+      <span class="fu">{</span>
+        <span class="dt">&quot;contact&quot;</span><span class="fu">:</span> <span class="dv">1989548603</span><span class="fu">,</span>
+        <span class="dt">&quot;device&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+        <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;42336654183&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;327545678963723008&quot;</span>
+      <span class="fu">}</span>
+    <span class="ot">]</span>
+  <span class="fu">},</span>
+  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+<span class="fu">}</span></code></pre></div>
+<blockquote>
+<p><code>message</code> is the ID of the unique this can be used in <code>message/get</code>, <code>message/read</code>, <code>message/delete</code></p>
+</blockquote>
+<h2 id="general-application-flow">General Application Flow</h2>
+<p>Here is an example of Zipwhip’s implementation for our devices.</p>
+<ol style="list-style-type: decimal">
+<li><a href="http://zipwhip.com/api/#/curl/conversation/list" title="Conversation List">conversation/list</a></li>
+<li><a href="http://zipwhip.com/api/#/curl/conversation/get" title="Conversation Get">conversation/get</a></li>
+<li><a href="http://zipwhip.com/api/#/curl/contact/list" title="Contact List">contact/list</a></li>
+</ol>
+<p><em>This will pull down all of the relevant data to build a GUI with Contacts, Conversations, and Messages.</em></p>
+<h3 id="conversationlist">Conversation/List</h3>
+<p>Conversations are broken up by the unique combination of recipients. It is the most logical way to display messages in a format that mirrors the mobile devices that we all use today.</p>
+<p>When performing a <code>conversation/list</code> you can page through the available conversations. &gt; Tip: On mobile devices or areas of less-than-ideal connectivity chose a page size that will at least fill the inital conversation list view on your applications. Then lazy load in the background.</p>
+<pre class="sh"><code>$ curl https://api.zipwhip.com/conversation/list \
+    -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789 \
+    -d limit=10 \
+    -d start=0</code></pre>
+<p><em>This tells Zipwhip that you want the 10 most recent conversations.</em></p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;total&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span>
+  <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;ptn:/2068308909&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;bcc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;cc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-18T11:44:57-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;deleted&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceAddress&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;1181232551&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">161304119203</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactDeviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactFirstName&quot;</span><span class="fu">:</span> <span class="st">&quot;Scarlett&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactId&quot;</span><span class="fu">:</span> <span class="dv">2127241703</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactLastName&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactMobileNumber&quot;</span><span class="fu">:</span> <span class="st">&quot;2068308909&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastMessageBody&quot;</span><span class="fu">:</span> <span class="st">&quot;Fbhv&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastMessageDate&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-18T11:45:06-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastNonDeletedMessageDate&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-18T11:45:06-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastUpdated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-19T12:42:23-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;unreadCount&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+      <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">1</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;ptn:/3604321502&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;bcc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;cc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-02-21T16:49:51-08:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;deleted&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceAddress&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;11893565339&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">142834903003</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactDeviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactFirstName&quot;</span><span class="fu">:</span> <span class="st">&quot;John&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactId&quot;</span><span class="fu">:</span> <span class="dv">1989536703</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactLastName&quot;</span><span class="fu">:</span> <span class="st">&quot;Fan&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactMobileNumber&quot;</span><span class="fu">:</span> <span class="st">&quot;3604321502&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastMessageBody&quot;</span><span class="fu">:</span> <span class="st">&quot;hi&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastMessageDate&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T12:58:39-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastNonDeletedMessageDate&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T12:58:39-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastUpdated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T12:59:10-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;new&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+      <span class="dt">&quot;unreadCount&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+      <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">1</span>
+    <span class="fu">}</span>
+  <span class="ot">]</span><span class="fu">,</span>
+  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+  <span class="dt">&quot;size&quot;</span><span class="fu">:</span> <span class="dv">2</span>
+<span class="fu">}</span></code></pre></div>
+<p><em>In this example we just show the most recent 2 conversations.</em></p>
+<h3 id="conversationget">Conversation/Get</h3>
+<p>Using the <code>conversation/get</code> will retrieve messages specific to the conversation. This will help to group relevant messages to the most recent conversations.</p>
+<p>When performing a <code>conversation/get</code> you can page through the available messages. &gt; Tip: Again, we’ll grab a handful of messages for the most recent conversations. This will populate the most relevant messages onto the client.</p>
+<pre class="sh"><code>$ curl https://api.zipwhip.com/conversation/get \
+    -d fingerprint=1181232551 \
+    -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789 \
+    -d limit=10 \
+    -d start=0</code></pre>
+<p><em>In this example we use the fingerprint from the first conversation</em> &gt; Tip: Similar to the <code>conversation/list</code> call you can limit the number of messages returned. This gives you as the implementor the chance to limit the number of messages return.</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+    <span class="dt">&quot;conversation&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+      <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;ptn:/3608964896&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;bcc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;cc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-02-21T16:54:39-08:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;deleted&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceAddress&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;4233621183&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">142836952103</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactDeviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactFirstName&quot;</span><span class="fu">:</span> <span class="st">&quot;Tim&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactId&quot;</span><span class="fu">:</span> <span class="dv">1989548603</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactLastName&quot;</span><span class="fu">:</span> <span class="st">&quot;Jones&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastContactMobileNumber&quot;</span><span class="fu">:</span> <span class="st">&quot;3608964896&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastMessageBody&quot;</span><span class="fu">:</span> <span class="st">&quot;Nada much.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastMessageDate&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T17:47:12-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastNonDeletedMessageDate&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T17:47:12-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastUpdated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T17:51:45-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;unreadCount&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+      <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">1</span>
+    <span class="fu">},</span>
+    <span class="dt">&quot;messages&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+      <span class="fu">{</span>
+        <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;ptn:/3608964896&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;advertisement&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;bcc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="st">&quot;Nada much.&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;carrier&quot;</span><span class="fu">:</span> <span class="st">&quot;ATT&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;cc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;contactDeviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+        <span class="dt">&quot;contactId&quot;</span><span class="fu">:</span> <span class="dv">1989548603</span><span class="fu">,</span>
+        <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T17:47:12-07:00&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;destAddress&quot;</span><span class="fu">:</span> <span class="st">&quot;8559479447&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+        <span class="dt">&quot;errorState&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;4233621183&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;firstName&quot;</span><span class="fu">:</span> <span class="st">&quot;Tim&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;fromName&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;fwd&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;hasAttachment&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;327222223187526144&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;isInFinalState&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;isParent&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;isRead&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+        <span class="dt">&quot;isSelf&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;lastName&quot;</span><span class="fu">:</span> <span class="st">&quot;Jones&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;lastUpdated&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;messageTransport&quot;</span><span class="fu">:</span> <span class="dv">8</span><span class="fu">,</span>
+        <span class="dt">&quot;mobileNumber&quot;</span><span class="fu">:</span> <span class="st">&quot;3608964896&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;parentId&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+        <span class="dt">&quot;sourceAddress&quot;</span><span class="fu">:</span> <span class="st">&quot;3608964896&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;thread&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;transmissionState&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;DELIVERED&quot;</span>
+        <span class="fu">},</span>
+        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;MO&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+        <span class="dt">&quot;visible&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+      <span class="fu">}</span><span class="ot">,</span>
+      <span class="fu">{</span>
+        <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;ptn:/3608964896&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;advertisement&quot;</span><span class="fu">:</span> <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">Sent via Zipwhip&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;bcc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="st">&quot; yo wassup?&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;carrier&quot;</span><span class="fu">:</span> <span class="st">&quot;ATT&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;cc&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;contactDeviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+        <span class="dt">&quot;contactId&quot;</span><span class="fu">:</span> <span class="dv">1989548603</span><span class="fu">,</span>
+        <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-24T17:46:48-07:00&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;destAddress&quot;</span><span class="fu">:</span> <span class="st">&quot;3608964896&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+        <span class="dt">&quot;errorState&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;4233621183&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;firstName&quot;</span><span class="fu">:</span> <span class="st">&quot;Tim&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;from&quot;</span><span class="fu">:</span> <span class="dv">1989548603</span><span class="fu">,</span>
+        <span class="dt">&quot;fromName&quot;</span><span class="fu">:</span> <span class="st">&quot;Zipwhip,&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;fwd&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;hasAttachment&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;327222123279641664&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;isInFinalState&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;isParent&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;isRead&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+        <span class="dt">&quot;isSelf&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;lastName&quot;</span><span class="fu">:</span> <span class="st">&quot;Jones&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;lastUpdated&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+        <span class="dt">&quot;latlong&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;loc&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;mobileNumber&quot;</span><span class="fu">:</span> <span class="st">&quot;3608964896&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;parentId&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+        <span class="dt">&quot;sourceAddress&quot;</span><span class="fu">:</span> <span class="st">&quot;8559479447&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;thread&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;transmissionState&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;DELIVERED&quot;</span>
+        <span class="fu">},</span>
+        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;ZO&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+        <span class="dt">&quot;visible&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+      <span class="fu">}</span>
+    <span class="ot">]</span>
+  <span class="fu">},</span>
+  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="contactlist">Contact/List</h3>
+<p>Zipwhip uses the <code>contact/list</code> primarily for when the user is composing a new message. We will then populate the To box based on the contacts retreived from <code>contact/list</code>.</p>
+<pre class="sh"><code>$ curl https://api.zipwhip.com/contact/list \
+    -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789 \
+    -d pageSize=10 \
+    -d page=0</code></pre>
+<blockquote>
+<p>Tip: Zipwhip typcially lazy loads contacts, as they are only necessary during the compose action.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;total&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span>
+  <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;ptn:/2062164915&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;birthday&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;business&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;carrier&quot;</span><span class="fu">:</span> <span class="st">&quot;Zipwhip&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;channel&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;city&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-10T21:38:55-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;deleted&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;firstName&quot;</span><span class="fu">:</span> <span class="st">&quot;Charlie The Dog&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;fwd&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">2109659003</span><span class="fu">,</span>
+      <span class="dt">&quot;lastName&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastUpdated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-10T21:42:48-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;latlong&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;loc&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;mobileNumber&quot;</span><span class="fu">:</span> <span class="st">&quot;2062164915&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;notes&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;phoneId&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+      <span class="dt">&quot;phoneKey&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;state&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;targetGroupDevice&quot;</span><span class="fu">:</span> <span class="dv">-1</span><span class="fu">,</span>
+      <span class="dt">&quot;thread&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span>
+      <span class="dt">&quot;zipcode&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;ptn:/2064551715&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;birthday&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;business&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+      <span class="dt">&quot;carrier&quot;</span><span class="fu">:</span> <span class="st">&quot;Vzw&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;channel&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;city&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;dateCreated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-02-22T10:34:06-08:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;deleted&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+      <span class="dt">&quot;deviceId&quot;</span><span class="fu">:</span> <span class="dv">309626613</span><span class="fu">,</span>
+      <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;firstName&quot;</span><span class="fu">:</span> <span class="st">&quot;Veronica&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;fwd&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">1991164703</span><span class="fu">,</span>
+      <span class="dt">&quot;lastName&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;lastUpdated&quot;</span><span class="fu">:</span> <span class="st">&quot;2013-04-10T21:17:11-07:00&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;latlong&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;loc&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;mobileNumber&quot;</span><span class="fu">:</span> <span class="st">&quot;2064551715&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;notes&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;phoneId&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span>
+      <span class="dt">&quot;phoneKey&quot;</span><span class="fu">:</span> <span class="st">&quot;2064551715&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;state&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;targetGroupDevice&quot;</span><span class="fu">:</span> <span class="dv">-1</span><span class="fu">,</span>
+      <span class="dt">&quot;thread&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span>
+      <span class="dt">&quot;zipcode&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span>
+    <span class="fu">}</span>
+  <span class="ot">]</span><span class="fu">,</span>
+  <span class="dt">&quot;page&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+  <span class="dt">&quot;pages&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+<span class="fu">}</span></code></pre></div>
+</body>
+</html>

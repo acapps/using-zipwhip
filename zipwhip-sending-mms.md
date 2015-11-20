@@ -30,21 +30,21 @@ therefore can be stored and used for all future requests.
 ###Example Request (1 image & body)
 ```sh
 $ curl –X POST \
-       –F “image=@Filename.png” \
-       https://api.zipwhip.com/messaging/send“?”session=[sessionKey]“&”to=+12065551212“&”body=Hello
+       –F“image=@Filename.png” \
+       'https://api.zipwhip.com/messaging/send?session=[sessionKey]&to=+12065551212&body=Hello'
 ```
 
 ###Example Request (2 images & body)
 ```sh
 $ curl –X POST \
-       –F “image1=@Filename01.png” \
-       –F “image2=@Filename02.png” \
-       https://api.zipwhip.com/messaging/send“?”session=[sessionKey]“&”to=+12065551212“&”body=Hello
+       –F“image1=@Filename01.png” \
+       –F“image2=@Filename02.png” \
+       'https://api.zipwhip.com/messaging/send?session=[sessionKey]&to=+12065551212&body=Hello'
 ```
 
 ###Example Request (Large text attachment)
 ```sh
 $ curl –X POST \
-       –F “file=@textFile.txt” \
-       https://api.zipwhip.com/messaging/send“?”session=[sessionKey]“&”to=+12065551212
+       –F“file=@textFile.txt” \
+       'https://api.zipwhip.com/messaging/send?session=[sessionKey]&to=+12065551212&body=Hello's
 ```

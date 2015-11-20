@@ -1,10 +1,12 @@
 #Retrieving Picture Messages (MMS)
 This document will outline the steps necessary to retrieving MMS content from
 Zipwhip.
+
 ##Message Attachment
 When looking at the details of the message, there is a field named, hasAttachment, this
 is a boolean value. If this value is true, then you’ll perform a messageAttachment/list
 web call.
+
 ###Parameters
 |Parameter|Required|Description
 |:---------|:--------|:----------

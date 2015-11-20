@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="github-markdown.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#sending-picture-messages-mms">Sending Picture Messages (MMS)</a><ul>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#example-request-1-image-body">Example Request (1 image &amp; body)</a></li>
+<li><a href="#example-request-2-images-body">Example Request (2 images &amp; body)</a></li>
+<li><a href="#example-request-large-text-attachment">Example Request (Large text attachment)</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="sending-picture-messages-mms">Sending Picture Messages (MMS)</h1>
+<p>Zipwhip now offers MMS on landline and toll free numbers. It is required at this time to have the feature enabled on the individual line.</p>
+<blockquote>
+<p>Note: Sending is currently limited to one recipient.</p>
+</blockquote>
+<blockquote>
+<p>Note: Sending is currently limited to MIME types: * image/bmp * image/gif * image/jpeg * image/png * text/plain</p>
+</blockquote>
+<blockquote>
+<p>Note: The parameter body is limited to 700 bytes greater than this should be sent as an attachment.</p>
+</blockquote>
+<blockquote>
+<p>Note: Payload size is currently limited to 600KB. No transcoding functionality is offered at this time.</p>
+</blockquote>
+<blockquote>
+<p>Note: A session is obtained from a user/login response. A session does not expire and therefore can be stored and used for all future requests.</p>
+</blockquote>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Required</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">session</td>
+<td align="left">True</td>
+<td align="left">Session is the response of user/login.</td>
+</tr>
+<tr class="even">
+<td align="left">to</td>
+<td align="left">True</td>
+<td align="left">The recipient’s phone number in E.164 format.</td>
+</tr>
+<tr class="odd">
+<td align="left">body</td>
+<td align="left">False</td>
+<td align="left">Text body of the message. Max 700 Bytes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-request-1-image-body">Example Request (1 image &amp; body)</h3>
+<pre class="sh"><code>$ curl –X POST \
+       –F“image=@Filename.png” \
+       &#39;https://api.zipwhip.com/messaging/send?session=[sessionKey]&amp;to=+12065551212&amp;body=Hello&#39;</code></pre>
+<h3 id="example-request-2-images-body">Example Request (2 images &amp; body)</h3>
+<pre class="sh"><code>$ curl –X POST \
+       –F“image1=@Filename01.png” \
+       –F“image2=@Filename02.png” \
+       &#39;https://api.zipwhip.com/messaging/send?session=[sessionKey]&amp;to=+12065551212&amp;body=Hello&#39;</code></pre>
+<h3 id="example-request-large-text-attachment">Example Request (Large text attachment)</h3>
+<pre class="sh"><code>$ curl –X POST \
+       –F“file=@textFile.txt” \
+       &#39;https://api.zipwhip.com/messaging/send?session=[sessionKey]&amp;to=+12065551212&amp;body=Hello&#39;s</code></pre>
+</body>
+</html>

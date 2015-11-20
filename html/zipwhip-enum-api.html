@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="github-markdown.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#zipwhip-enum-api">Zipwhip Enum API</a><ul>
+<li><a href="#using-ismobile">Using isMobile</a><ul>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#example-request">Example Request</a></li>
+<li><a href="#example-response---it-is-a-mobile-number">Example Response - It is a Mobile Number</a></li>
+<li><a href="#example-response---it-is-not-a-mobile-number">Example Response - It is Not a Mobile Number</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="zipwhip-enum-api">Zipwhip Enum API</h1>
+<p>Zipwhip’s Enum API gives developers access to critical information about the phone numbers they are interacting with. For example, if you want to only add the “Text Me” button in your CRM software when the recepient’s number is a mobile number then you would use Zipwhip’s isMobile API.</p>
+<h2 id="using-ismobile">Using isMobile</h2>
+<p>The most basic enum call Zipwhip offers, is the number a mobile number?</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Required</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">api_key</td>
+<td align="left">True</td>
+<td align="left">api_key is provided by Zipwhip.</td>
+</tr>
+<tr class="even">
+<td align="left">phone_number</td>
+<td align="left">True</td>
+<td align="left">The number to be looked up. In E.164 format.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-request">Example Request</h3>
+<pre class="sh"><code>$ curl -G https://provision.zipwhip.com/api/20140925/enum/mobile \
+       -d api_key=[api_key] \
+       -d phone_number=[phone_number]</code></pre>
+<h3 id="example-response---it-is-a-mobile-number">Example Response - It is a Mobile Number</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;5dcfdcf7-1839-84bb-asdf-172bdf32d8e6&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;is_mobile&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="example-response---it-is-not-a-mobile-number">Example Response - It is Not a Mobile Number</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;5dcfdcf7-1839-84bb-asdf-192bdf32d8e7&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;is_mobile&quot;</span><span class="fu">:</span> <span class="kw">false</span>
+<span class="fu">}</span></code></pre></div>
+</body>
+</html>
