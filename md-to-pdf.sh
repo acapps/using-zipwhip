@@ -7,3 +7,5 @@ for i in *.html; do
   cp $i html/$i
   rm $i
 done
+
+rm html/README.html
