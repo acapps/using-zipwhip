@@ -66,9 +66,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Zipwhip’s API relies on a sessionKey to perform all actions. This is a GUID representation of an authenticated user. &gt;Tip: SessionKeys do not expire, they can be obtained once and then used for all future actions.</p>
 <p>A sessionKey is obtained from perfomring a <code>user/login</code> webcall for the account.</p>
 <h3 id="it-all-begins-with-userlogin">It all begins with user/login</h3>
-<pre class="sh"><code>$ curl -i https://api.zipwhip.com/user/login \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -i https://api.zipwhip.com/user/login \
     -d username=[phone number] \
-    -d password=[account password]</code></pre>
+    -d password=[account password]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>
   <span class="dt">&quot;response&quot;</span><span class="fu">:</span><span class="st">&quot;3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789&quot;</span>
@@ -77,10 +77,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In this case the <code>response</code> is the sessionKey for the account.</p>
 </blockquote>
 <p>Next you’ll want to send a message. To do so, we will use the the sessionKey retrieved from <code>user/login</code>.</p>
-<pre class="sh"><code>$ curl -i https://api.zipwhip.com/message/send \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -i https://api.zipwhip.com/message/send \
     -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789
-    -d --data-rulencode contacts=&#39;+18559479447&#39;
-    -d --data-urlencode body=&#39;Hello World, from Zipwhip!&#39;</code></pre>
+    <span class="kw">-d</span> --data-rulencode contacts=<span class="st">&#39;+18559479447&#39;</span>
+    <span class="kw">-d</span> --data-urlencode body=<span class="st">&#39;Hello World, from Zipwhip!&#39;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="fu">{</span>
     <span class="dt">&quot;fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;4236521183&quot;</span><span class="fu">,</span>
@@ -110,10 +110,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3 id="conversationlist">Conversation/List</h3>
 <p>Conversations are broken up by the unique combination of recipients. It is the most logical way to display messages in a format that mirrors the mobile devices that we all use today.</p>
 <p>When performing a <code>conversation/list</code> you can page through the available conversations. &gt; Tip: On mobile devices or areas of less-than-ideal connectivity chose a page size that will at least fill the inital conversation list view on your applications. Then lazy load in the background.</p>
-<pre class="sh"><code>$ curl https://api.zipwhip.com/conversation/list \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> https://api.zipwhip.com/conversation/list \
     -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789 \
     -d limit=10 \
-    -d start=0</code></pre>
+    -d start=0</code></pre></div>
 <p><em>This tells Zipwhip that you want the 10 most recent conversations.</em></p>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;total&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span>
@@ -171,11 +171,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3 id="conversationget">Conversation/Get</h3>
 <p>Using the <code>conversation/get</code> will retrieve messages specific to the conversation. This will help to group relevant messages to the most recent conversations.</p>
 <p>When performing a <code>conversation/get</code> you can page through the available messages. &gt; Tip: Again, we’ll grab a handful of messages for the most recent conversations. This will populate the most relevant messages onto the client.</p>
-<pre class="sh"><code>$ curl https://api.zipwhip.com/conversation/get \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> https://api.zipwhip.com/conversation/get \
     -d fingerprint=1181232551 \
     -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789 \
     -d limit=10 \
-    -d start=0</code></pre>
+    -d start=0</code></pre></div>
 <p><em>In this example we use the fingerprint from the first conversation</em> &gt; Tip: Similar to the <code>conversation/list</code> call you can limit the number of messages returned. This gives you as the implementor the chance to limit the number of messages return.</p>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="fu">{</span>
@@ -284,10 +284,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="fu">}</span></code></pre></div>
 <h3 id="contactlist">Contact/List</h3>
 <p>Zipwhip uses the <code>contact/list</code> primarily for when the user is composing a new message. We will then populate the To box based on the contacts retreived from <code>contact/list</code>.</p>
-<pre class="sh"><code>$ curl https://api.zipwhip.com/contact/list \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> https://api.zipwhip.com/contact/list \
     -d session=3d0f1dde-aaff-4ce8-b61a-af212a860abc:123456789 \
     -d pageSize=10 \
-    -d page=0</code></pre>
+    -d page=0</code></pre></div>
 <blockquote>
 <p>Tip: Zipwhip typcially lazy loads contacts, as they are only necessary during the compose action.</p>
 </blockquote>

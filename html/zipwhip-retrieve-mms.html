@@ -88,9 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <h3 id="example-request">Example Request</h3>
-<pre class="sh"><code>$ curl -G https://api.zipwhip.com/messageAttachment/list \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -G https://api.zipwhip.com/messageAttachment/list \
        -d session=[sessionKey] \
-       -d messageId=[id of message]</code></pre>
+       -d messageId=[id of message]</code></pre></div>
 <h3 id="example-response">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;total&quot;</span><span class="fu">:</span><span class="dv">2</span><span class="fu">,</span>
@@ -117,9 +117,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="retrieve-hosted-content">Retrieve Hosted Content</h2>
 <p>HostedContent is Zipwhip’s brand name for our MMS storage server. All items are stored with a key and permissions. ###Parameters |Parameter|Required|Description| |:———|:——–|:———–| |session|True|Session is the response of user/login. |storageKey|True|The id of the media file.</p>
 <h3 id="example-request-1">Example Request</h3>
-<pre class="sh"><code>$ curl -G https://api.zipwhip.com/hostedContent/get \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -G https://api.zipwhip.com/hostedContent/get \
        -d session=[sessionKey] \
-       -d storageKey=[storageKey]</code></pre>
+       -d storageKey=[storageKey]</code></pre></div>
 <h3 id="example-response-1">Example Response</h3>
 <p>The response will contain the media object as part of the payload.</p>
 </body>

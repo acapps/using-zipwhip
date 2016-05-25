@@ -77,8 +77,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="operatorlist">Operator/List</h2>
 <p>Returns the Operators associated with the account.</p>
 <h3 id="exaple-request">Exaple Request</h3>
-<pre class="sh"><code>$curl -G https://api.zipwhip.com/operator/list \
-    -d session={session}</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-G</span> https://api.zipwhip.com/operator/list \
+    -d session=<span class="dt">{session}</span></code></pre></div>
 <h3 id="example-response">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;response&quot;</span><span class="fu">:</span><span class="ot">[</span>
@@ -161,8 +161,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="rolelist">Role/List</h2>
 <p>Lists out the Roles associated with the line. This request is used specifically for process of creating an Operator on the line. The Role outlines within the WebApp the features available to the Operator.</p>
 <h3 id="example-request">Example Request</h3>
-<pre class="sh"><code>$curl -G https://api.zipwhip.com/role/list \
-    -d session={session}</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-G</span> https://api.zipwhip.com/role/list \
+    -d session=<span class="dt">{session}</span></code></pre></div>
 <h3 id="example-response-1">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;response&quot;</span><span class="fu">:</span><span class="ot">[</span>
@@ -232,14 +232,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="operatorsave">Operator/Save</h2>
 <p>Operator Save is used for both creating a new operator or changing active state. The <code>active</code> status can be toggled by sending in <code>true</code> or <code>false</code>.</p>
 <h3 id="example-request-create-new-operator">Example Request (Create New Operator)</h3>
-<pre class="sh"><code>$curl -X POST https://api.zipwhip.com/operator/save \
-    -d session={session} \
-    --data-urlencode username={Name used to log in unique per number} \
-    --data-urlencode firstName={first name} \
-    --data-urlencode lastName={last name} \
-    --data-urlencode email={email address unique per number} \
-    --data-urlencode active={true|false}
-    --data-urlencode roleId={Id of role, role/list}</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/operator/save \
+    -d session=<span class="dt">{session}</span> \
+    --data-urlencode username={Name used to log in unique per number} <span class="kw">\</span>
+    <span class="kw">--data-urlencode</span> firstName={first name} <span class="kw">\</span>
+    <span class="kw">--data-urlencode</span> lastName={last name} <span class="kw">\</span>
+    <span class="kw">--data-urlencode</span> email={email address unique per number} <span class="kw">\</span>
+    <span class="kw">--data-urlencode</span> active=<span class="dt">{true|false}</span>
+    <span class="kw">--data-urlencode</span> roleId={Id of role, role/list}</code></pre></div>
 <h3 id="example-response-create-new-operator">Example Response (Create New Operator)</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>
@@ -282,12 +282,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="fu">}</span>
 <span class="fu">}</span></code></pre></div>
 <h3 id="example-request-set-to-inactive">Example Request (Set to Inactive)</h3>
-<pre class="sh"><code>$curl -X POST https://api.zipwhip.com/operator/save \
-    -d session={session} \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/operator/save \
+    -d session=<span class="dt">{session}</span> \
     --data-urlencode email=testname@zipwhip.com \
     --data-rulencode username=testname \
     -d operatorId=585005 \
-    -d active=false</code></pre>
+    -d active=false</code></pre></div>
 <h3 id="example-response-set-to-inactive">Example Response (Set to Inactive)</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>
@@ -330,12 +330,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="fu">}</span>
 <span class="fu">}</span></code></pre></div>
 <h3 id="example-request-set-to-active">Example Request (Set to Active)</h3>
-<pre class="sh"><code>$curl -X POST https://api.zipwhip.com/operator/save \
-    -d session={session} \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/operator/save \
+    -d session=<span class="dt">{session}</span> \
     --data-urlencode email=testname@zipwhip.com \
     --data-rulencode username=testname \
     -d operatorId=585005 \
-    -d active=true</code></pre>
+    -d active=true</code></pre></div>
 <h3 id="example-response-set-to-active">Example Response (Set to Active)</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>
@@ -380,9 +380,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="operatorunassign">Operator/Unassign</h2>
 <p>Remove the user from the account.</p>
 <h3 id="example-request-1">Example Request</h3>
-<pre class="sh"><code>$curl -G https://api.zipwhip.com/operator/unassign \
-    -d session={session} \
-    -d operatorId={ID of Operator}</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-G</span> https://api.zipwhip.com/operator/unassign \
+    -d session=<span class="dt">{session}</span> \
+    -d operatorId={ID of Operator}</code></pre></div>
 <h3 id="example-response-2">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>

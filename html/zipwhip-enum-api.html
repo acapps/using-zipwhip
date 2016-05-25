@@ -49,19 +49,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="TOC">
 <ul>
 <li><a href="#zipwhip-enum-api">Zipwhip Enum API</a><ul>
-<li><a href="#using-ismobile">Using isMobile</a><ul>
+<li><a href="#using-istextable">Using isTextable</a><ul>
 <li><a href="#parameters">Parameters</a></li>
 <li><a href="#example-request">Example Request</a></li>
-<li><a href="#example-response---it-is-a-mobile-number">Example Response - It is a Mobile Number</a></li>
-<li><a href="#example-response---it-is-not-a-mobile-number">Example Response - It is Not a Mobile Number</a></li>
+<li><a href="#example-response---it-is-textable">Example Response - It is Textable</a></li>
+<li><a href="#example-response---it-is-not-textable">Example Response - It is Not Textable</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 <h1 id="zipwhip-enum-api">Zipwhip Enum API</h1>
-<p>Zipwhip’s Enum API gives developers access to critical information about the phone numbers they are interacting with. For example, if you want to only add the “Text Me” button in your CRM software when the recepient’s number is a mobile number then you would use Zipwhip’s isMobile API.</p>
-<h2 id="using-ismobile">Using isMobile</h2>
-<p>The most basic enum call Zipwhip offers, is the number a mobile number?</p>
+<p>Zipwhip’s Enum API gives developers access to critical information about the phone numbers they are interacting with. For example, if you want to only add the “Text Me” button in your CRM software when the recepient’s number textable, then you would use Zipwhip’s isTextable API.</p>
+<h2 id="using-istextable">Using isTextable</h2>
+<p>The most basic enum call Zipwhip offers, is the number text-enabled?</p>
 <h3 id="parameters">Parameters</h3>
 <table>
 <thead>
@@ -85,18 +85,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <h3 id="example-request">Example Request</h3>
-<pre class="sh"><code>$ curl -G https://provision.zipwhip.com/api/20140925/enum/mobile \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -G https://provision.zipwhip.com/api/20140925/enum/textable \
        -d api_key=[api_key] \
-       -d phone_number=[phone_number]</code></pre>
-<h3 id="example-response---it-is-a-mobile-number">Example Response - It is a Mobile Number</h3>
+       -d phone_number=[phone_number]</code></pre></div>
+<h3 id="example-response---it-is-textable">Example Response - It is Textable</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
-    <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;5dcfdcf7-1839-84bb-asdf-172bdf32d8e6&quot;</span><span class="fu">,</span>
-    <span class="dt">&quot;is_mobile&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+    <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="st">&quot;false&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;provider&quot;</span><span class="fu">:</span> <span class="st">&quot;Zipwhip US - Syniverse&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;status_code&quot;</span><span class="fu">:</span> <span class="st">&quot;100&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;textable&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+    <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;1228fb27-376b-832e-737b-1e600437e2d6&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;tollfree&quot;</span>
 <span class="fu">}</span></code></pre></div>
-<h3 id="example-response---it-is-not-a-mobile-number">Example Response - It is Not a Mobile Number</h3>
+<h3 id="example-response---it-is-not-textable">Example Response - It is Not Textable</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
-    <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;5dcfdcf7-1839-84bb-asdf-192bdf32d8e7&quot;</span><span class="fu">,</span>
-    <span class="dt">&quot;is_mobile&quot;</span><span class="fu">:</span> <span class="kw">false</span>
+    <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="st">&quot;false&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;provider&quot;</span><span class="fu">:</span> <span class="st">&quot;unknown&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;status_code&quot;</span><span class="fu">:</span> <span class="st">&quot;100&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;textable&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+    <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623f84a4-faa2-e8d5-6609-4238b96fb2da&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;tollfree&quot;</span>
 <span class="fu">}</span></code></pre></div>
 </body>
 </html>

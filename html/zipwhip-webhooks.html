@@ -176,12 +176,12 @@ Content-Type: application/json; charset=UTF-8</code></pre>
 </tbody>
 </table>
 <h3 id="example-request">Example Request</h3>
-<pre class="sh"><code>$ curl -X POST https://api.zipwhip.com/webhook/add \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -X POST https://api.zipwhip.com/webhook/add \
        -d session=[sessionKey] \
        -d type=message \
        -d event=receive \
        -d url=https://test.zipwhip.com/message/receive \
-       -d method=POST</code></pre>
+       -d method=POST</code></pre></div>
 <h3 id="example-response">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
@@ -230,9 +230,9 @@ Content-Type: application/json; charset=UTF-8</code></pre>
 </tbody>
 </table>
 <h3 id="example-request-1">Example Request</h3>
-<pre class="sh"><code>$ curl -X POST https://api.zipwhip.com/webhook/update \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -X POST https://api.zipwhip.com/webhook/update \
        -d session=[sessionKey] \
-       -d method=PUT</code></pre>
+       -d method=PUT</code></pre></div>
 <h3 id="example-response-1">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
@@ -266,8 +266,8 @@ Content-Type: application/json; charset=UTF-8</code></pre>
 </tbody>
 </table>
 <h3 id="example-request-2">Example Request</h3>
-<pre class="sh"><code>$ curl -G https://api.zipwhip.com/webhook/list \
-       -d session=[sessionKey]</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -G https://api.zipwhip.com/webhook/list \
+       -d session=[sessionKey]</code></pre></div>
 <h3 id="example-response-2">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
@@ -306,9 +306,9 @@ Content-Type: application/json; charset=UTF-8</code></pre>
 </tbody>
 </table>
 <h3 id="example-request-3">Example Request</h3>
-<pre class="sh"><code>$ curl -X POST https://api.zipwhip.com/webhook/delete \
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="kw">curl</span> -X POST https://api.zipwhip.com/webhook/delete \
        -d session=[sessionKey] \
-       -d webhookId=687557714</code></pre>
+       -d webhookId=687557714</code></pre></div>
 <h3 id="example-response-3">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
