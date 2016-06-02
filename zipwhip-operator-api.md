@@ -7,7 +7,7 @@ Information to perform basic interactions with the Operator API.
 
 Returns the Operators associated with the account.
 
-###Exaple Request
+###Example Request
 ```SH
 $curl -G https://api.zipwhip.com/operator/list \
 	-d session={session}
@@ -240,7 +240,7 @@ $curl -X POST https://api.zipwhip.com/operator/save \
 $curl -X POST https://api.zipwhip.com/operator/save \
 	-d session={session} \
     --data-urlencode email=testname@zipwhip.com \
-    --data-rulencode username=testname \
+    --data-urlencode username=testname \
     -d operatorId=585005 \
     -d active=false
 ```
@@ -294,7 +294,7 @@ $curl -X POST https://api.zipwhip.com/operator/save \
 $curl -X POST https://api.zipwhip.com/operator/save \
 	-d session={session} \
     --data-urlencode email=testname@zipwhip.com \
-    --data-rulencode username=testname \
+    --data-urlencode username=testname \
     -d operatorId=585005 \
     -d active=true
 ```
