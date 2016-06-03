@@ -81,9 +81,65 @@ Host: https://api.zipwhip.com
 <p>The <code>appId</code> is specific to Auto Reply, the value is: <code>901</code>.</p>
 <h3 id="example-request">Example Request</h3>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/app/install \
-    -d session=<span class="dt">{session}</span> \
+  -d session=<span class="dt">{session}</span> \
   -d appId=901 \
-  --data-urlencode settings=<span class="st">&#39;{&quot;enabled&quot;:true,&quot;settings&quot;:[{&quot;body&quot;:&quot;We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.&quot;,&quot;title&quot;:&quot;MorningAutoReply&quot;,&quot;startDate&quot;:&quot;2016-06-02T21:57:31-0700&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;enabled&quot;:true,&quot;keywordEnabled&quot;:false,&quot;times&quot;:[{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;1&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;2&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;3&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;4&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;5&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;6&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;7&quot;,&quot;active&quot;:true}]}]}&#39;</span></code></pre></div>
+  --data-urlencode settings=<span class="st">&#39;{</span>
+<span class="st">  &quot;enabled&quot;:true,</span>
+<span class="st">  &quot;settings&quot;:[</span>
+<span class="st">    {</span>
+<span class="st">      &quot;body&quot;:&quot;We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.&quot;,</span>
+<span class="st">      &quot;title&quot;:&quot;MorningAutoReply&quot;,</span>
+<span class="st">      &quot;startDate&quot;:&quot;2016-06-02T21:57:31-0700&quot;,</span>
+<span class="st">      &quot;endDate&quot;:&quot;&quot;,</span>
+<span class="st">      &quot;enabled&quot;:true,</span>
+<span class="st">      &quot;keywordEnabled&quot;:false,</span>
+<span class="st">      &quot;times&quot;:[</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;1&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;2&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;3&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;4&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;5&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;6&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;7&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        }</span>
+<span class="st">      ]</span>
+<span class="st">    }</span>
+<span class="st">  ]</span>
+<span class="st">}&#39;</span></code></pre></div>
 <h3 id="example-response">Example Response</h3>
 <p><strong>The key element in the response is the <code>installedAppId</code>, this ID allows the implementor to reference the Auto Reply app.</strong></p>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
@@ -166,14 +222,122 @@ Host: https://api.zipwhip.com
 ?session=&amp;installedAppId=&amp;settings</code></pre>
 <h3 id="example-request-add-new-auto-reply">Example Request (Add New Auto Reply)</h3>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/app/alter \
-    -d session=<span class="dt">{session}</span> \
+  -d session=<span class="dt">{session}</span> \
   -d installedAppId=36104 \
-  --data-urlencode settings=<span class="st">&#39;{&quot;enabled&quot;:true,&quot;settings&quot;:[{&quot;body&quot;:&quot;We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.&quot;,&quot;title&quot;:&quot;EveningAutoReply&quot;,&quot;startDate&quot;:&quot;2016-06-02T21:59:50-0700&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;enabled&quot;:true,&quot;keywordEnabled&quot;:false,&quot;times&quot;:[{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;1&quot;,&quot;active&quot;:false},{&quot;startTime&quot;:&quot;17:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;2&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;17:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;3&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;17:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;4&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;17:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;5&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;17:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;6&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;7&quot;,&quot;active&quot;:false}]},{&quot;body&quot;:&quot;We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.&quot;,&quot;title&quot;:&quot;MorningAutoReply&quot;,&quot;startDate&quot;:&quot;2016-06-02T21:59:50-0700&quot;,&quot;endDate&quot;:&quot;&quot;,&quot;enabled&quot;:true,&quot;keywordEnabled&quot;:false,&quot;times&quot;:[{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;1&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;2&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;3&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;4&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;5&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;07:59&quot;,&quot;day&quot;:&quot;6&quot;,&quot;active&quot;:true},{&quot;startTime&quot;:&quot;00:00&quot;,&quot;endTime&quot;:&quot;23:59&quot;,&quot;day&quot;:&quot;7&quot;,&quot;active&quot;:true}]}]}&#39;</span></code></pre></div>
+  --data-urlencode settings=<span class="st">&#39;{</span>
+<span class="st">  &quot;enabled&quot;:true,</span>
+<span class="st">  &quot;settings&quot;:[</span>
+<span class="st">    {</span>
+<span class="st">      &quot;body&quot;:&quot;We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.&quot;,</span>
+<span class="st">      &quot;title&quot;:&quot;EveningAutoReply&quot;,</span>
+<span class="st">      &quot;startDate&quot;:&quot;2016-06-02T21:59:50-0700&quot;,</span>
+<span class="st">      &quot;endDate&quot;:&quot;&quot;,</span>
+<span class="st">      &quot;enabled&quot;:true,</span>
+<span class="st">      &quot;keywordEnabled&quot;:false,</span>
+<span class="st">      &quot;times&quot;:[</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;1&quot;,</span>
+<span class="st">          &quot;active&quot;:false</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;17:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;2&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;17:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;3&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;17:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;4&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;17:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;5&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;17:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;6&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;7&quot;,</span>
+<span class="st">          &quot;active&quot;:false</span>
+<span class="st">        }</span>
+<span class="st">      ]</span>
+<span class="st">    },</span>
+<span class="st">    {</span>
+<span class="st">      &quot;body&quot;:&quot;We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.&quot;,</span>
+<span class="st">      &quot;title&quot;:&quot;MorningAutoReply&quot;,</span>
+<span class="st">      &quot;startDate&quot;:&quot;2016-06-02T21:59:50-0700&quot;,</span>
+<span class="st">      &quot;endDate&quot;:&quot;&quot;,</span>
+<span class="st">      &quot;enabled&quot;:true,</span>
+<span class="st">      &quot;keywordEnabled&quot;:false,</span>
+<span class="st">      &quot;times&quot;:[</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;1&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;2&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;3&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;4&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;5&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;07:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;6&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        },</span>
+<span class="st">        {</span>
+<span class="st">          &quot;startTime&quot;:&quot;00:00&quot;,</span>
+<span class="st">          &quot;endTime&quot;:&quot;23:59&quot;,</span>
+<span class="st">          &quot;day&quot;:&quot;7&quot;,</span>
+<span class="st">          &quot;active&quot;:true</span>
+<span class="st">        }</span>
+<span class="st">      ]</span>
+<span class="st">    }</span>
+<span class="st">  ]</span>
+<span class="st">}&#39;</span></code></pre></div>
 <h3 id="example-response-add-new-auto-reply">Example Response (Add New Auto Reply)</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span><span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;response&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">}</span></code></pre></div>
 <h3 id="example-request-remove-auto-reply">Example Request (Remove Auto Reply)</h3>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/app/alter \
-    -d session=<span class="dt">{session}</span> \
+  -d session=<span class="dt">{session}</span> \
   -d installedAppId=36104 \
   --data-urlencode settings=<span class="st">&#39;{&quot;enabled&quot;:false,&quot;settings&quot;:[]}&#39;</span></code></pre></div>
 <h3 id="example-response-remove-auto-reply">Example Response (Remove Auto Reply)</h3>
@@ -185,7 +349,7 @@ Host: https://api.zipwhip.com
 <p>?session=</p>
 <h3 id="example-request-1">Example Request</h3>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-G</span> https://api.zipwhip.com/app/list \
-    -d session=<span class="dt">{session}</span> \</code></pre></div>
+  -d session=<span class="dt">{session}</span> \</code></pre></div>
 <h3 id="example-response-1">Example Response</h3>
 <div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;success&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span>

@@ -22,7 +22,63 @@ The `appId` is specific to Keywords, the value is: `4601`.
 $curl -X POST https://api.zipwhip.com/app/install \
 	-d session={session} \
   -d appId=4601 \
-  --data-urlencode settings='{"enabled": true,"settings": [{"enabled": true,"startDate": "2014-12-11T17:17:38-0800","body": "https://zipwhip.com/dist/img/global/logo.svg","title": "coffee","times": [{"startTime": "00:00","active": true,"day": "1","endTime": "23:59"},{"startTime": "00:00","active": true,"day": "2","endTime": "23:59"},{"startTime": "00:00","active": true,"day": "3","endTime": "23:59"},{"startTime": "00:00","active": true,"day": "4","endTime": "23:59"},{"startTime": "00:00","active": true,"day": "5","endTime": "23:59"},{"startTime": "00:00","active": true,"day": "6","endTime": "23:59"},{"startTime": "00:00","active": true,"day": "7","endTime": "23:59"}],"keywordEnabled": true,"endDate": ""}]}'
+  --data-urlencode settings='{
+  "enabled":true,
+  "settings":[
+    {
+      "enabled":true,
+      "startDate":"2014-12-11T17:17:38-0800",
+      "body":"https://zipwhip.com/dist/img/global/logo.svg",
+      "title":"coffee",
+      "times":[
+        {
+          "startTime":"00:00",
+          "active":true,
+          "day":"1",
+          "endTime":"23:59"
+        },
+        {
+          "startTime":"00:00",
+          "active":true,
+          "day":"2",
+          "endTime":"23:59"
+        },
+        {
+          "startTime":"00:00",
+          "active":true,
+          "day":"3",
+          "endTime":"23:59"
+        },
+        {
+          "startTime":"00:00",
+          "active":true,
+          "day":"4",
+          "endTime":"23:59"
+        },
+        {
+          "startTime":"00:00",
+          "active":true,
+          "day":"5",
+          "endTime":"23:59"
+        },
+        {
+          "startTime":"00:00",
+          "active":true,
+          "day":"6",
+          "endTime":"23:59"
+        },
+        {
+          "startTime":"00:00",
+          "active":true,
+          "day":"7",
+          "endTime":"23:59"
+        }
+      ],
+      "keywordEnabled":true,
+      "endDate":""
+    }
+  ]
+}'
 ```
 
 ### Example Response
@@ -118,7 +174,115 @@ Host: https://api.zipwhip.com
 $curl -X POST https://api.zipwhip.com/app/alter \
 	-d session={session} \
   -d installedAppId=17835202 \
-  --data-urlencode settings='{"enabled":false,"settings":[{"body":"Echo","title":"Echo","startDate":"2016-06-02T11:14:19-0700","endDate":"","enabled":false,"keywordEnabled":true,"times":[{"startTime":"00:00","endTime":"23:59","day":"1","active":true},{"startTime":"00:00","endTime":"23:59","day":"2","active":true},{"startTime":"00:00","endTime":"23:59","day":"3","active":true},{"startTime":"00:00","endTime":"23:59","day":"4","active":true},{"startTime":"00:00","endTime":"23:59","day":"5","active":true},{"startTime":"00:00","endTime":"23:59","day":"6","active":true},{"startTime":"00:00","endTime":"23:59","day":"7","active":true}]},{"body":"Hi","title":"New","startDate":"2016-06-02T11:14:19-0700","endDate":"","enabled":false,"keywordEnabled":true,"times":[{"startTime":"00:00","endTime":"23:59","day":"1","active":true},{"startTime":"00:00","endTime":"23:59","day":"2","active":true},{"startTime":"00:00","endTime":"23:59","day":"3","active":true},{"startTime":"00:00","endTime":"23:59","day":"4","active":true},{"startTime":"00:00","endTime":"23:59","day":"5","active":true},{"startTime":"00:00","endTime":"23:59","day":"6","active":true},{"startTime":"00:00","endTime":"23:59","day":"7","active":true}]}]}'
+  --data-urlencode settings='{
+  "enabled":false,
+  "settings":[
+    {
+      "body":"Echo",
+      "title":"Echo",
+      "startDate":"2016-06-02T11:14:19-0700",
+      "endDate":"",
+      "enabled":false,
+      "keywordEnabled":true,
+      "times":[
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"1",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"2",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"3",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"4",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"5",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"6",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"7",
+          "active":true
+        }
+      ]
+    },
+    {
+      "body":"Hi",
+      "title":"New",
+      "startDate":"2016-06-02T11:14:19-0700",
+      "endDate":"",
+      "enabled":false,
+      "keywordEnabled":true,
+      "times":[
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"1",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"2",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"3",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"4",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"5",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"6",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"7",
+          "active":true
+        }
+      ]
+    }
+  ]
+}'
 
 ```
 

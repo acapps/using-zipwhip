@@ -20,9 +20,65 @@ The `appId` is specific to Auto Reply, the value is: `901`.
 ### Example Request
 ```SH
 $curl -X POST https://api.zipwhip.com/app/install \
-	-d session={session} \
+  -d session={session} \
   -d appId=901 \
-  --data-urlencode settings='{"enabled":true,"settings":[{"body":"We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.","title":"MorningAutoReply","startDate":"2016-06-02T21:57:31-0700","endDate":"","enabled":true,"keywordEnabled":false,"times":[{"startTime":"00:00","endTime":"23:59","day":"1","active":true},{"startTime":"00:00","endTime":"07:59","day":"2","active":true},{"startTime":"00:00","endTime":"07:59","day":"3","active":true},{"startTime":"00:00","endTime":"07:59","day":"4","active":true},{"startTime":"00:00","endTime":"07:59","day":"5","active":true},{"startTime":"00:00","endTime":"07:59","day":"6","active":true},{"startTime":"00:00","endTime":"23:59","day":"7","active":true}]}]}'
+  --data-urlencode settings='{
+  "enabled":true,
+  "settings":[
+    {
+      "body":"We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.",
+      "title":"MorningAutoReply",
+      "startDate":"2016-06-02T21:57:31-0700",
+      "endDate":"",
+      "enabled":true,
+      "keywordEnabled":false,
+      "times":[
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"1",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"2",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"3",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"4",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"5",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"6",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"7",
+          "active":true
+        }
+      ]
+    }
+  ]
+}'
 ```
 
 ### Example Response
@@ -121,9 +177,117 @@ Host: https://api.zipwhip.com
 
 ```SH
 $curl -X POST https://api.zipwhip.com/app/alter \
-	-d session={session} \
+  -d session={session} \
   -d installedAppId=36104 \
-  --data-urlencode settings='{"enabled":true,"settings":[{"body":"We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.","title":"EveningAutoReply","startDate":"2016-06-02T21:59:50-0700","endDate":"","enabled":true,"keywordEnabled":false,"times":[{"startTime":"00:00","endTime":"23:59","day":"1","active":false},{"startTime":"17:00","endTime":"23:59","day":"2","active":true},{"startTime":"17:00","endTime":"23:59","day":"3","active":true},{"startTime":"17:00","endTime":"23:59","day":"4","active":true},{"startTime":"17:00","endTime":"23:59","day":"5","active":true},{"startTime":"17:00","endTime":"23:59","day":"6","active":true},{"startTime":"00:00","endTime":"23:59","day":"7","active":false}]},{"body":"We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.","title":"MorningAutoReply","startDate":"2016-06-02T21:59:50-0700","endDate":"","enabled":true,"keywordEnabled":false,"times":[{"startTime":"00:00","endTime":"23:59","day":"1","active":true},{"startTime":"00:00","endTime":"07:59","day":"2","active":true},{"startTime":"00:00","endTime":"07:59","day":"3","active":true},{"startTime":"00:00","endTime":"07:59","day":"4","active":true},{"startTime":"00:00","endTime":"07:59","day":"5","active":true},{"startTime":"00:00","endTime":"07:59","day":"6","active":true},{"startTime":"00:00","endTime":"23:59","day":"7","active":true}]}]}'
+  --data-urlencode settings='{
+  "enabled":true,
+  "settings":[
+    {
+      "body":"We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.",
+      "title":"EveningAutoReply",
+      "startDate":"2016-06-02T21:59:50-0700",
+      "endDate":"",
+      "enabled":true,
+      "keywordEnabled":false,
+      "times":[
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"1",
+          "active":false
+        },
+        {
+          "startTime":"17:00",
+          "endTime":"23:59",
+          "day":"2",
+          "active":true
+        },
+        {
+          "startTime":"17:00",
+          "endTime":"23:59",
+          "day":"3",
+          "active":true
+        },
+        {
+          "startTime":"17:00",
+          "endTime":"23:59",
+          "day":"4",
+          "active":true
+        },
+        {
+          "startTime":"17:00",
+          "endTime":"23:59",
+          "day":"5",
+          "active":true
+        },
+        {
+          "startTime":"17:00",
+          "endTime":"23:59",
+          "day":"6",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"7",
+          "active":false
+        }
+      ]
+    },
+    {
+      "body":"We are currently closed. A representative is available Monday - Friday, 8:00am to 5:00pm PT.",
+      "title":"MorningAutoReply",
+      "startDate":"2016-06-02T21:59:50-0700",
+      "endDate":"",
+      "enabled":true,
+      "keywordEnabled":false,
+      "times":[
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"1",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"2",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"3",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"4",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"5",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"07:59",
+          "day":"6",
+          "active":true
+        },
+        {
+          "startTime":"00:00",
+          "endTime":"23:59",
+          "day":"7",
+          "active":true
+        }
+      ]
+    }
+  ]
+}'
 
 ```
 
@@ -137,7 +301,7 @@ $curl -X POST https://api.zipwhip.com/app/alter \
 
 ```SH
 $curl -X POST https://api.zipwhip.com/app/alter \
-	-d session={session} \
+  -d session={session} \
   -d installedAppId=36104 \
   --data-urlencode settings='{"enabled":false,"settings":[]}'
 ```
@@ -164,7 +328,7 @@ Host: https://api.zipwhip.com
 
 ```SH
 $curl -G https://api.zipwhip.com/app/list \
-	-d session={session} \
+  -d session={session} \
 ```
 
 ### Example Response
