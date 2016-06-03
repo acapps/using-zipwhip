@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="github-markdown.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#signature-api">Signature API</a><ul>
+<li><a href="#signatureset">signature/set</a><ul>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#example-request-custom-signature">Example Request (Custom Signature)</a></li>
+<li><a href="#example-response-custom-signature">Example Response (Custom Signature)</a></li>
+<li><a href="#example-request-empty-signature">Example Request (Empty Signature)</a></li>
+<li><a href="#example-response-empty-signature">Example Response (Empty Signature)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="signature-api">Signature API</h1>
+<p>Guide for interfacing with the Signature Feature.</p>
+<h2 id="signatureset">signature/set</h2>
+<p>Allow integrators to dynamically modify the signature for a specific account.</p>
+<h3 id="syntax">Syntax</h3>
+<pre><code>POST /user/signature/set HTTP/1.1
+Host: https://api.zipwhip.com
+
+?session=&amp;signature=</code></pre>
+<h3 id="example-request-custom-signature">Example Request (Custom Signature)</h3>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/user/signature/set \
+  -d session=<span class="dt">{session}</span>
+  <span class="kw">--data-urlencode</span> signature=<span class="st">&#39;This is my signature.&#39;</span></code></pre></div>
+<h3 id="example-response-custom-signature">Example Response (Custom Signature)</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="example-request-empty-signature">Example Request (Empty Signature)</h3>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ot">$curl</span> <span class="kw">-X</span> POST https://api.zipwhip.com/user/signature/set \
+  -d session=<span class="dt">{session}</span>
+  <span class="kw">--data-urlencode</span> signature=<span class="st">&#39;&#39;</span></code></pre></div>
+<h3 id="example-response-empty-signature">Example Response (Empty Signature)</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
+  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+<span class="fu">}</span></code></pre></div>
+</body>
+</html>
